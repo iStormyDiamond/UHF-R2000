@@ -1,0 +1,75 @@
+dependencies {
+    implementation files('libs/xUtils-2.5.5.jar') //implementation files('org.xutils:xutils:2.5.+')
+    implementation files('libs/jxl.jar')
+    implementation (files("libs/DeviceAPI_ver20210924.aar"))
+}
+
+
+
+//main
+public RFIDWithUHFUART mReader;
+
+read()
+
+//
+public class InitTask extends AsyncTask<String, Integer, Boolean> {
+        ProgressDialog mypDialog;
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            // TODO Auto-generated method stub
+            return mReader.init();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+
+            mypDialog.cancel();
+
+            if (!result) {
+                //Toast.makeText(BaseTabFragmentActivity.this, "init fail", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+
+            mypDialog = new ProgressDialog(MainActivity.this);
+            mypDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mypDialog.setMessage("init...");
+            mypDialog.setCanceledOnTouchOutside(false);
+            mypDialog.show();
+        }
+    }
+    private void read() throws ConfigurationException {
+        String ptrStr = "2";
+        String cntStr = "6";
+        String pwdStr = "00000000";
+        boolean result = false;
+        int Bank = 0;
+        Bank = IUHF.Bank_EPC;
+        mReader = RFIDWithUHFUART.getInstance();
+        String entity = "";
+        entity = mReader.readData(pwdStr,
+                IUHF.Bank_EPC,
+                Integer.parseInt(ptrStr),
+                Integer.parseInt(cntStr));
+
+        if (entity != null) {
+            result = true;
+            autoCompleteTextViewSearchHome.setText(entity);
+            Log.w("##","entity "+entity);
+        } else {
+            result = false;
+            autoCompleteTextViewSearchHome.setText("");
+        }
+/*
+        if (!result) {
+            mContext.playSound(2);
+        } else {
+            mContext.playSound(1);
+        }*/
+    }
