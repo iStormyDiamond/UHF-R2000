@@ -58,7 +58,7 @@ public class InitTask extends AsyncTask<String, Integer, Boolean> {
             result = false;
             autoCompleteTextViewSearchHome.setText("");
         }
-/*
+        /*
         if (!result) {
             mContext.playSound(2);
         } else {
