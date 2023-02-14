@@ -1,6 +1,6 @@
 # UHF-R2000
 
-**Add file ti libs
+**Add libary file to libs
 
 1.DeviceAPI_ver20210924
 
