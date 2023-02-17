@@ -10,7 +10,7 @@
 
 
 
-**add dependencies to gradle module app
+**add dependencies gradle module app
 
 dependencies {
 
@@ -22,3 +22,5 @@ dependencies {
     implementation (files("libs/DeviceAPI_ver20210924.aar"))
     
 }
+
+
